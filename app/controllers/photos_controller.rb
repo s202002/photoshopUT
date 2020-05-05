@@ -13,10 +13,11 @@ class PhotosController < ApplicationController
 
   def create
   	@photo = Photo.new(photo_params)
-  	if @photo save
+    @photo.customer = current_customer
+  	if @photo.save
   		redirect_to photos_path
   	else
-  		render new_customer_photo_path
+  		redirect_back(fallback_location: root_path)
   	end
   end
 
@@ -27,4 +28,5 @@ class PhotosController < ApplicationController
   private
   def photo_params
   	params.require(:photo).permit(:name, :title, :explain, :place, :tag)
+  end
 end

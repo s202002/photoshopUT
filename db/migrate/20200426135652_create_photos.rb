@@ -3,7 +3,7 @@ class CreatePhotos < ActiveRecord::Migration[5.2]
     create_table :photos do |t|
       t.text :explain
       t.string :image_id
-      t.string :title
+      t.text :title
       t.integer :customer_id
       t.text :place
       t.string :tag

@@ -1,12 +1,11 @@
-<h1><%= @customer.name %>詳細ページ</h1>
+@<%= @customer.name %>さんのページ
 <div class ="container">
 	<div class ="row">
 		<div class ="col-lg-4">
-			<%= attachment_image_tag @customer, :profile_image, :fill, 800, 800,fallback: "no_image.jpg", :fill, 800, 800), class: "img-circle" %>
+			<%= attachment_image_tag(photo.customer, :profile_image, :fill, 200,200, fallback: "assets/no_image.jpg", size: '200x200' class: "img-circle") %>
+			<%= @customer.name %>
 			<div class ="customer">
-				<%= link_to customer_path(@customer) %>
-				<%= @customer.name %>
 			</div>
-			<%= @photo%>
+			<%  %>
     	</div>
     </div>

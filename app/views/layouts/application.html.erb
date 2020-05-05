@@ -1,40 +1,63 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>PhotoshopUT</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>PhotoshopUT</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-    <header>
-      <div class="container">
-        <div class="row" style="background-color: green;">
-          <div class="col-lg-6">
-            <h3 style="color: white;">PhotoShopUT</h3>
-          </div>
-          <div class="col-lg-4">
-            <% if customer_signed_in? %>
-            <%= link_to customer_path(current_customer.id) do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>マイページ
-            <% end %>
+<body>
+  <header>
+    <div class="container">
+      <div class="row" style="background-color: green; width: 100%;">
+        <div class="col-lg-6">
+          <h3 style="color: white;">PhotoShopUT</h3>
+        </div>
 
-            <%= linkt_to about_path do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>About
-            <% end %>
+        <ul class="nav navbar-nav navbar-right">
+          <% if customer_signed_in? %>
+          <%= link_to customer_path(current_customer.id) do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>マイページ
+          <% end %>
 
-            <%= link_to destroy_customer_session_path, method: :delete do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>ログアウト
-            <% end %>
+          <%= link_to about_path do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>About
+          <% end %>
 
-            <% else %>
+          <%= link_to destroy_customer_session_path, method: :delete do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>ログアウト
+          <% end %>
 
-
-
+          <% else %>
+          <li style="margin: 10px;">
+            <li style="color: white;">
+              <%= link_to new_customer_registration_path  do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>会員登録
+              <% end %>
+            </li>
+          </li>
+          <li style="margin: 10px;">
+            <li style="color: white;">
+              <%= link_to do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>ログイン
+              <% end %>
+            </li>
+          </li>
+          <li style="margin: 10px;">
+            <li style="color: white;">
+              <%= link_to about_path do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>About
+              <% end %>
+            </li>
+          </li>
+          <li style="margin: 10px;">
+            <li style="color: white;">
+              <%= link_to new_admin_session_path do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>管理人専用
+              <% end %>
+            </li>
+          </li>
+          <% end %>
 
         </div>
       </div>
     </header>
     <%= yield %>
   </body>
-</html>
+  </html>

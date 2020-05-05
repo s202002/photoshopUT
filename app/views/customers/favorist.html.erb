@@ -1,5 +1,8 @@
     <%= @favoPhotoList.each do |photo| %>
-        # これでお気に入りの投稿のリストが取得できた！
-        photo.title
-        photo.explain      
+       <!--  # これでお気に入りの投稿のリストの表示 -->
+        <%= photo.title %>
+        <%= photo.explain %>
+        <%= attachment_image_tag photo, :image, :fill, 400, 400) %>
+        <%= ("@" + photo.place) %>
+	    <%= ("#" + photo.tag) %>
     end

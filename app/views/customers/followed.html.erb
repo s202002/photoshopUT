@@ -1,0 +1,23 @@
+<h2>フォロワー一覧</h2>
+  <div class="container">
+    <div class="row">
+    	<div class="col-lg-8 col-lg-offset-2">
+    		<% @customer.follower_customer.where.not(id: current_customer.id).each do |customer| %>
+    		<table class="table table-striped">
+    			<tr>
+    				<td>
+    				<%= attachment_image_tag(customer, :profile_image, :fill, 200,200, fallback: "no_image.jpg", size: '200x200', style: "border-radius: 70%;") %>
+    				</td>
+    				<td>
+    					<%= link_to customer_path(customer.id) do %>
+    					<%= customer.name %>
+    					<% end %>
+    				</td>
+    				<td>
+    					<%= "投稿数：#{customer.photo.count}" %>
+    				</td>
+    			</tr>
+    		</table>
+    	</div>
+    </div>
+</div>

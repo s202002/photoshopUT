@@ -11,53 +11,66 @@
 
 <body>
   <header>
-    <div class="container">
-      <div class="row" style="background-color: green; width: 100%;">
-        <div class="col-lg-6">
-          <h3 style="color: white;">PhotoShopUT</h3>
-        </div>
+      <div class="row">
+        <div class="col-lg-12" style="background-color: green; width:100%; margin-top:50px;">
+          <div class="nav navbar-nav navbar-left">
+            <li style="margin: 10px; font-size: 30px;">
+              <%= link_to "PhotoShopUT", root_path %>
+            </li>
+          </div>
 
-        <ul class="nav navbar-nav navbar-right">
-          <% if customer_signed_in? %>
-          <%= link_to customer_path(current_customer.id) do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>マイページ
-          <% end %>
+          <ul class="nav navbar-nav navbar-right">
+            <% if admin_signed_in? %>
+            <li style="margin: 10px;">
+              <%= link_to destroy_admin_session_path, method: :delete do%><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>管理者ログアウト
+              <% end %>
 
-          <%= link_to about_path do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>About
-          <% end %>
-
-          <%= link_to destroy_customer_session_path, method: :delete do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>ログアウト
-          <% end %>
-
-          <% else %>
-          <li style="margin: 10px;">
-            <li style="color: white;">
-              <%= link_to new_customer_registration_path  do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>会員登録
+<!--             会員としてログインしていた場合 -->
+            <% elsif customer_signed_in? %>
+            <li style="margin: 10px;">
+              <%= link_to customer_path(current_customer.id) do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>マイページ
               <% end %>
             </li>
-          </li>
-          <li style="margin: 10px;">
-            <li style="color: white;">
-              <%= link_to do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>ログイン
-              <% end %>
-            </li>
-          </li>
-          <li style="margin: 10px;">
-            <li style="color: white;">
+
+            <li style="margin: 10px;">
               <%= link_to about_path do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>About
               <% end %>
             </li>
-          </li>
-          <li style="margin: 10px;">
-            <li style="color: white;">
+
+            <li style="margin: 10px;">
+              <%= link_to destroy_customer_session_path, method: :delete do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>ログアウト
+              <% end %>
+            </li>
+<!--             どちらにもログインしていない場合 -->
+            <% else %>
+            <li style="margin: 10px;">
+              <%= link_to new_customer_registration_path  do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>会員登録
+              <% end %>
+            </li>
+            <li style="margin: 10px;">
+              <%= link_to new_customer_session_path do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>ログイン
+              <% end %>
+            </li>
+            <li style="margin: 10px;">
+              <%= link_to about_path do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>About
+              <% end %>
+            </li>
+            <li style="margin: 10px;">
               <%= link_to new_admin_session_path do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>管理人専用
               <% end %>
             </li>
           </li>
           <% end %>
-
-        </div>
+        </ul>
       </div>
-    </header>
-    <%= yield %>
-  </body>
-  </html>
+    </div>
+</header>
+<%= yield %>
+<div class="row">
+  <div class="col-lg-12" style="background-color: green; width:100%; margin-top:50px; height: 50px;">
+
+  </div>
+  </div>
+</div>
+</body>
+</html>

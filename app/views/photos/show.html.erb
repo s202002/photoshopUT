@@ -1,1 +1,89 @@
-<%= link_to photo.customer.name, customer_path
+<div class="conatainer">
+	<div class="row">
+		<div class="col-lg-3">
+			<center>
+				<div style="margin-top: 10px;">
+					<%= attachment_image_tag(@photo.customer, :profile_image, size: "200x200", fallback: "no_image.jpg", class: "img-circle") %><br>
+					<%= @photo.customer.name %><br>
+				</div>
+				<% if @photo.customer.id == current_customer.id %>
+				<div style="margin-top: 10px;">
+					<%= link_to "プロフィール編集", edit_customer_path(current_customer), class: "btn btn-default", style: "width: 150px;" %><br>
+				</div>
+				<% end %>
+				<div style="margin-top: 10px;">
+					<%= link_to "投稿する", new_photo_path, class: "btn btn-success", style: "width: 150px;" %>
+				</div>
+				<div style="margin-top: 10px;">
+					<%= link_to "投稿一覧", customers_path, class: "btn btn-default", style: "width: 150px;" %><br>
+				</div>
+			</center>
+		</div>
+		<div class="col-lg-6">
+			<%= attachment_image_tag @photo, :image, size: "600x400", style: "margin-top: 50px;" %>
+						<!-- マップの表示 -->
+			<h2>撮影場所</h2>
+			<div id='map'></div>
+			<style>
+				#map{
+					height: 300px;
+				}
+			</style>
+			<script>
+				let map
+				let geocoder
+				function initMap(){
+				  // geocoderを初期化
+				  geocoder = new google.maps.Geocoder()
+				  map = new google.maps.Map(document.getElementById('map'), {
+				  	center: {lat: <%= @lat %>, lng: <%= @lon %>},
+				  	zoom: 8
+				  });
+				}
+		    </script>
+		</div>
+
+		<div class="col-lg-3 pull-right" style="margin-top: 100px;">
+			<%= attachment_image_tag(@photo.customer, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", class: "img-circle") %>
+			<%= @photo.customer.name %><br>
+			@<%= @photo.place %>
+			#<%= @photo.tag %>
+			<% if @photo.favorited_by?(current_customer) %>
+			<%= link_to photo_favorites_path(@photo), method: :delete do %>
+			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true" style="color: red;"></span>
+			<%= @photo.favorites.count %> いいね
+			<% end %>
+			<% else %>
+			<%= link_to photo_favorites_path(@photo), method: :post do %>
+			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+			<%= @photo.favorites.count %> いいね<br>
+			<% end %>
+			<% end %>
+			<li>
+				<%= @photo.explain %><br>
+			</li>
+			<% if  @photo.customer.id == current_customer.id %>
+			<div style="margin-top: 10px;" >
+				<%= link_to "編集する", edit_photo_path(@photo), class: "btn btn-primary" %>
+
+				<%= link_to "削除する", photo_path(@photo), method: :delete, class: "btn btn-danger" %>
+			</div>
+			<%= form_for [@photo, @comment] do |f| %>
+			<%= f.text_area :comment, class: "form-control", placeholder: "コメントはこちら" %>
+			<%= f.submit "コメントする", class: "btn btn-success" %>
+			<% end %>
+			<% @photo.comments.each do |comment| %>
+			<table class="table table-striped">
+				<tr>
+					<%= attachment_image_tag(comment.customer, :profile_image, size: "50x50", fallback: "no_image.jpg", class: "img-circle") %>
+					<%= comment.customer.name %>
+				</tr>
+				<li>
+					<%= comment.comment %>
+			</table>
+			<% end %>
+			<% end %>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC13UiZIcCc6oFkSkn_uuZug-pkR1zYy24&callback=initMap" async defer></script>
+</div>
+</div>
+</div>

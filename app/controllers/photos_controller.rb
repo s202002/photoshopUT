@@ -5,6 +5,10 @@ class PhotosController < ApplicationController
 
   def show
   	@photo = Photo.find(params[:id])
+    geo_data = Geocoder.search(@photo.place)
+    @lat = geo_data[0].data["lat"].to_f
+    @lon = geo_data[0].data["lon"].to_f
+    @comment = Comment.new
   end
 
   def new
@@ -25,8 +29,20 @@ class PhotosController < ApplicationController
   	@photo = Photo.find(params[:id])
   end
 
+  def update
+    @photo = Photo.find(params[:id])
+    @photo.update(photo_params)
+    redirect_to photo_path(@photo.id)
+  end
+
+  def destroy
+    @photo = Photo.find(params[:id])
+    @photo.destroy
+    redirect_to request.referer
+  end
+
   private
   def photo_params
-  	params.require(:photo).permit(:name, :title, :explain, :place, :tag)
+  	params.require(:photo).permit(:name, :title, :explain, :place, :tag, :image)
   end
 end

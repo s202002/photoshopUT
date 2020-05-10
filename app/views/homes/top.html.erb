@@ -1,8 +1,19 @@
 <div class="container">
 	<div class="row">
-		<div class="collg-9">
-			<%= image_tag "hokkaido.jpg", style:"width:100%; margin-top:50px;" %>
-			<div style="position: absolute; top: 60%; left: 30%; max-width: 100%; max-height: 100%; padding: 30px; text-align: left; color: #f5f5f5;" >
+		<div class="image_container">
+		<div class="top_image" style="margin-top: 30px;">
+			<%= image_tag "sample7.JPG" %>
+			<%= image_tag "sample3.JPG"%>
+			<%= image_tag "sample8.JPG" %>
+			<%= image_tag "sample10.JPG" %>
+			<%= image_tag "sample4.JPG" %>
+			<%= image_tag "sample9.JPG" %>
+			<%= image_tag "sample2.JPG" %>
+		</div>
+	</div>
+		<div class="col-lg-9">
+			<%= image_tag "hokkaido.jpg", style:"height: 800px; width:1000px; margin-top:50px;" %>
+			<div style="position: absolute; top: 300px; left: 300px; max-width: 100%; max-height: 100%; padding: 120px; text-align: left; color: #f5f5f5;" >
 				<p>
 					ようこそ、PhotoshopUTへ。<br>
 					北海道で撮影された写真の投稿及び閲覧サイトです。<br>
@@ -13,4 +24,20 @@
 	</div>
 </div>
 
-# <%= link_to "会員登録はこちらから", new_customer_registration_path %>
+
+
+
+<script>
+	$(".top_image").skippr({
+	transition : 'fade',
+	speed : 1000,
+	easing : 'easeOutQuart',
+	navType : 'bubble',
+	childrenElemnetType : 'image',
+	arrows : true,
+	autoPlay : true,
+	autoPlayDuration : 2000,
+	keyboardOnAlways : true,
+	hidePrevious : false
+});
+</script>

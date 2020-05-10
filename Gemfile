@@ -73,3 +73,7 @@ gem 'jquery-rails'
 
 # ページネーション
 gem 'kaminari','~> 1.1.1'
+# マップ表示に必要なジェムファイル
+gem 'geocoder'
+# 検索機能
+gem 'ransack'

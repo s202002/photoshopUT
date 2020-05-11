@@ -77,3 +77,8 @@ gem 'kaminari','~> 1.1.1'
 gem 'geocoder'
 # 検索機能
 gem 'ransack'
+# デプロイのため
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end

@@ -6,17 +6,22 @@
     		<table class="table table-striped">
     			<tr>
     				<td>
-    				<%= attachment_image_tag(customer, :profile_image, :fill, 200,200, fallback: "no_image.jpg", size: '200x200', style: "border-radius: 70%;") %>
+    				<%= attachment_image_tag(customer, :profile_image, size: '100x100', fallback: "no_image.jpg", size: '100x100', style: "border-radius: 70%;") %>
     				</td>
     				<td>
+    					<div style="margin-top: 50px;">
     					<%= link_to customer_path(customer.id) do %>
     					<%= customer.name %>
     					<% end %>
+    					</div>
     				</td>
     				<td>
-    					<%= "投稿数：#{customer.photo.count}" %>
+    					<div style="margin-top: 50px;">
+    					<%= "投稿数：#{customer.photos.count}" %>
+    					</div>
     				</td>
     			</tr>
+    			<% end %>
     		</table>
     	</div>
     </div>

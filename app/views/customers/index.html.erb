@@ -1,27 +1,29 @@
 <h1>投稿一覧</h1>
 <div class ="container">
 	<div class="row">
-		<div class="col-lg-4">
-			<%= attachment_image_tag(current_customer, :profile_image, :fill, 200,200, fallback: "no_image.jpg", size: '200x200', style: "border-radius: 70%;") %>
-			<h3><%= current_customer.name %></h3>
-			<div style="margin-top: 10px;">
-				<%= link_to "フォロー数： #{current_customer.follower.count}", following_path(current_customer), class: "btn btn-default" %>
-			</div>
-			<div style="margin-top: 10px;">
-				<%=link_to "フォロワー数： #{current_customer.followed.count}", followed_path(current_customer), class: "btn btn-success" %>
-			</div>
-			<div style="margin-top: 10px;">
-				<%= link_to "プロフィール編集", edit_customer_path(current_customer), class: "btn btn-default", style: "width: 150px;" %><br>
-			</div>
-			<div style="margin-top: 10px;">
-				<%= link_to "投稿する", new_photo_path, class: "btn btn-success", style: "width: 150px;" %>
-			</div>
-			<div style="margin-top: 10px;">
-				<%= link_to "投稿一覧", customers_path, class: "btn btn-default", style: "width: 150px;" %><br>
-			</div>
-			<div style="margin-top: 10px;">
-				<%= link_to "お気に入り一覧", favolist_customer_path(current_customer), class: "btn btn-success", style: "width: 150px;" %><br>
-  			</div>
+		<div class="col-lg-3">
+			<center>
+				<%= attachment_image_tag(current_customer, :profile_image, :fill, 200,200, fallback: "no_image.jpg", size: '200x200', style: "border-radius: 70%;") %>
+				<h3><%= current_customer.name %></h3>
+				<div style="margin-top: 10px;">
+					<%= link_to "フォロー数： #{current_customer.follower.count}", follower_customer_path(current_customer), class: "btn btn-default" %>
+				</div>
+				<div style="margin-top: 10px;">
+					<%=link_to "フォロワー数： #{current_customer.followed.count}", followed_customer_path(current_customer), class: "btn btn-success" %>
+				</div>
+				<div style="margin-top: 10px;">
+					<%= link_to "プロフィール編集", edit_customer_path(current_customer), class: "btn btn-default", style: "width: 150px;" %><br>
+				</div>
+				<div style="margin-top: 10px;">
+					<%= link_to "投稿する", new_photo_path, class: "btn btn-success", style: "width: 150px;" %>
+				</div>
+				<div style="margin-top: 10px;">
+					<%= link_to "投稿一覧", customers_path, class: "btn btn-default", style: "width: 150px;" %><br>
+				</div>
+				<div style="margin-top: 10px;">
+					<%= link_to "お気に入り一覧", favolist_customer_path(current_customer), class: "btn btn-success", style: "width: 150px;" %><br>
+				</div>
+			</center>
 		</div>
 
 		<div class ="col-lg-8" >
@@ -30,44 +32,48 @@
 				<% @photos.each do |photo| %>
 				<tr>
 					<td>
-					<%= link_to photo_path(photo.id) do %>
-					<%= attachment_image_tag photo, :image, size: "300x200" %>
-					<% end %>
-					<%= link_to customer_path(photo.customer.id) do %>
-					<%= attachment_image_tag(photo.customer, :profile_image, :fill, 100,100, fallback: "no_image.jpg", class: "img-circle") %>
-					<%= photo.customer.name %><br>
-					<% end %>
+						<%= link_to photo_path(photo.id) do %>
+						<%= attachment_image_tag photo, :image, size: "300x200" %>
+						<% end %>
+						<%= link_to customer_path(photo.customer.id) do %>
+						<%= attachment_image_tag(photo.customer, :profile_image, :fill, 100,100, fallback: "no_image.jpg", class: "img-circle") %>
+						<%= photo.customer.name %><br>
+						<% end %>
 					</td>
-					<td style="margin-top: 50%;">
-					@<%= photo.place %>
-					#<%= photo.tag %>
-                	</td>
-               		<td>
-					<% if photo.favorited_by?(current_customer) %>
-					<%= link_to photo_favorites_path(photo), method: :delete do %>
-					<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-					<%= photo.favorites.count %> いいね
-					<% end %>
-					<% else %>
-					<%= link_to photo_favorites_path(photo), method: :post do %>
-					<i class="fa fa-heart-o" aria-hidden="true"></i>
-					<%= photo.favorites.count %> いいね
-					<% end %>
-								<div style="margin-top: 10px;">
-			<% if current_customer.following?(photo.customer) %>
-        <%= link_to 'フォローやめる', unfollow_path(photo.customer.id), method: :POST, class: "btn btn-default" %>
-      <% else %>
-        <%= link_to 'フォローする', follow_path(photo.customer.id), method: :POST, class: "btn btn-success" %>
-      <% end %>
-		</div>
-					<% end %>
+					<td>
+						<div style="margin-top: 100px;">
+							@<%= photo.place %>
+							#<%= photo.tag %>
+						</div>
+					</td>
+					<td>
+						<div style="margin-top: 100px;">
+							<% if photo.customer.id != current_customer.id %>
+							<% if photo.favorited_by?(current_customer) %>
+							<%= link_to photo_favorites_path(photo), method: :delete do %>
+							<span class="glyphicon glyphicon-heart-empty" aria-hidden="true" style="color: red;"></span>
+							<%= photo.favorites.count %> いいね
+							<% end %>
+							<% else %>
+							<%= link_to photo_favorites_path(photo), method: :post do %>
+							<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+							<%= photo.favorites.count %> いいね
+							<% end %>
+							<% end %>
+							<div style="margin-top: 10px;">
+								<% if current_customer.following?(photo.customer) %>
+								<%= link_to 'フォローやめる', unfollow_path(photo.customer.id), method: :POST, class: "btn btn-default" %>
+								<% else %>
+								<%= link_to 'フォローする', follow_path(photo.customer.id), method: :POST, class: "btn btn-success" %>
+								<% end %>
+							</div>
+							<% end %>
+						</div>
 					</td>
 				</tr>
 				<% end %>
 			</table>
 		</div>
 	</div>
-
-
-		<%#= paginate @photos, class: "paginate" %>
-	</div>
+	<%#= paginate @photos, class: "paginate" %>
+</div>

@@ -1,4 +1,6 @@
 class PhotosController < ApplicationController
+  before_action :authenticate_customer!
+
   def index
   	@photos = Photo.all
   end
@@ -21,7 +23,7 @@ class PhotosController < ApplicationController
   	if @photo.save
   		redirect_to photos_path
   	else
-  		redirect_back(fallback_location: root_path)
+  		render "new"
   	end
   end
 

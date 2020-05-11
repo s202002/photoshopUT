@@ -10,8 +10,6 @@ Rails.application.routes.draw do
   get 'photos/edit'
   post 'follow/:id' => 'relationships#follow', as: 'follow' # フォローする
   post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow' # フォロー外す
-  get 'following' => 'customers#following'
-  get 'followed' => 'customers#followed'
   # devise_for :customers
   devise_for :customers, controllers: {
     sessions: 'customers/sessions'
@@ -30,6 +28,7 @@ Rails.application.routes.draw do
   	member do
   		get :favolist
   		get :destroy_cus
+  		get :follower, :followed
   	end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  # before_action :authenticate_customer! except: [:top, :index]
+  before_action :authenticate_customer!
   def index
   	@photos = Photo.page(params[:page]).reverse_order
   end
@@ -31,7 +31,7 @@ class CustomersController < ApplicationController
   	redirect_to customer_path(@customer.id)
   end
 
-  def following
+  def follower
     @customer = Customer.find(params[:id])
   end
 

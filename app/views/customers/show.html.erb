@@ -1,9 +1,16 @@
 <div class ="container">
 	<div class ="row">
-		<div class="col-lg-4" style="margin-top: 30px;">
+		<div class="col-lg-3" style="margin-top: 30px;">
+			<center>
 			<%= attachment_image_tag(@customer, :profile_image, :fill, 200,200, fallback: "no_image.jpg", size: '200x200', style: "border-radius: 70%;") %>
 			<h3><%= @customer.name %></h3>
 			<% if @customer.id == current_customer.id %>
+			<div style="margin-top: 10px;">
+				<%= link_to "フォロー数： #{@customer.follower.count}", follower_customer_path(@customer), class: "btn btn-default" %>
+			</div>
+			<div style="margin-top: 10px;">
+				<%=link_to "フォロワー数： #{@customer.followed.count}", followed_customer_path(@customer), class: "btn btn-success" %>
+			</div>
 			<div style="margin-top: 10px;">
 			<%= link_to "プロフィール編集", edit_customer_path(current_customer), class: "btn btn-default", style: "width: 150px;" %><br>
 		</div>
@@ -17,6 +24,7 @@
 		<div style="margin-top: 10px;">
 			<%= link_to "お気に入り一覧", favolist_customer_path(@customer), class: "btn btn-success", style: "width: 150px;" %><br>
 		</div>
+	    </center>
 	</div>
 		<div class="col-lg-8" style="margin-top: 30px;">
 			<% @customer.photos.each do |photo| %>
@@ -31,12 +39,12 @@
 					#<%= photo.tag %>
 					<% if photo.favorited_by?(current_customer) %>
 					<%= link_to photo_favorites_path(photo), method: :delete do %>
-					<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+					<span class="glyphicon glyphicon-heart-empty" aria-hidden="true" style="color: red;"></span>
 					<%= photo.favorites.count %> いいね
 					<% end %>
 					<% else %>
 					<%= link_to photo_favorites_path(photo), method: :post do %>
-					<i class="fa fa-heart-o" aria-hidden="true"></i>
+					<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
 					<%= photo.favorites.count %> いいね
 					<% end %>
 					<% end %>

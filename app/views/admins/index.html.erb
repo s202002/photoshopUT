@@ -2,16 +2,16 @@
 <h2>管理人専用：会員一覧ページ</h2>
 <table class="table table-striped">
 <% @customers.each do |customer| %>
-<tr>
-	<td>
-		<%= attachment_image_tag(customer, :profile_image, :fill, 100,100, fallback: "no_image.jpg", class: "img-circle") %>
-	</td>
-	<td>
-		<h2><%= customer.name %></h2>
-	</td>
-	<td>
-		<%= link_to "削除する", destroy_cus_customer_path(customer.id), class: "btn btn-danger", style: "margin-top: 30px;" %>
-	</td>
-</tr>
-</table>
+	<tr>
+		<td>
+			<%= attachment_image_tag(customer, :profile_image, :fill, 100,100, fallback: "no_image.jpg", size: "100x100", class: "img-circle") %>
+		</td>
+		<td>
+			<h2><%= customer.name %></h2>
+		</td>
+		<td>
+			<%= link_to "削除する", destroy_cus_customer_path(customer.id), class: "btn btn-danger", style: "margin-top: 30px;" %>
+		</td>
+	</tr>
 <% end %>
+</table>

@@ -1,0 +1,28 @@
+<h2>フォロー一覧</h2>
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <% @customer.following_customer.where.not(id: current_customer.id).each do |customer| %>
+            <table class="table table-striped">
+                <tr>
+                    <td>
+                    <%= attachment_image_tag(customer, :profile_image, size: '100x100', fallback: "no_image.jpg", size: '100x100', style: "border-radius: 70%;") %>
+                    </td>
+                    <td>
+                        <div style="margin-top: 50px;">
+                        <%= link_to customer_path(customer.id) do %>
+                        <%= customer.name %>
+                        <% end %>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="margin-top: 50px;">
+                        <%= "投稿数：#{customer.photos.count}" %>
+                        </div>
+                    </td>
+                </tr>
+                <% end %>
+            </table>
+        </div>
+    </div>
+</div>

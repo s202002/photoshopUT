@@ -3,8 +3,8 @@
 <table class="table table-striped">
 	<tr>
 		<td>
-		<%= attachment_image_tag photo, :image, size: "300x200" %>
-	</td>
+			<%= attachment_image_tag photo, :image, size: "300x200" %>
+		</td>
 		<td>
 			<%= attachment_image_tag(photo.customer, :profile_image, :fill, 200,200, fallback: "no_image.jpg", class: "img-circle") %>
 		</td>
@@ -15,5 +15,5 @@
 			<%= link_to "削除する", photo_path(photo), method: :delete, class: "btn btn-danger", style: "margin-top: 80px;" %>
 		</td>
 	</tr>
-</table>
 <% end %>
+</table>

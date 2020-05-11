@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_customer!
 	def create
 		photo = Photo.find(params[:photo_id])
 		comment = current_customer.comments.new(comment_params)

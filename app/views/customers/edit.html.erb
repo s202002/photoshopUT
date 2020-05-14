@@ -29,14 +29,14 @@
   <div class="col-sm-6">
     <label>パスワード</label>
     <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %>字以上必要です)</em>
-        <% end %><br />
-        <%= f.password_field :password, autocomplete: "new-password" %>
-   </div>
-   <div class="col-sm-6">
-   	<label>パスワード再確認</label>
-   	<%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-   </div>
+    <em>(<%= @minimum_password_length %>字以上必要です)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+  <div class="col-sm-6">
+    <label>パスワード再確認</label>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
 
 
   <div class="col-sm-6">

@@ -48,7 +48,6 @@
                 	</td>
                		<td>
                		<div style="margin-top: 100px;">
-               		<% if photo.customer.id != current_customer.id %>
 					<% if photo.favorited_by?(current_customer) %>
 					<%= link_to photo_favorites_path(photo), method: :delete do %>
 					<span class="glyphicon glyphicon-heart-empty" aria-hidden="true" style="color: red;"></span>
@@ -60,13 +59,14 @@
 					<%= photo.favorites.count %> いいね
 					<% end %>
 					<% end %>
-								<div style="margin-top: 10px;">
-			<% if current_customer.following?(photo.customer) %>
-        <%= link_to 'フォローやめる', unfollow_path(photo.customer.id), method: :POST, class: "btn btn-default" %>
-      <% else %>
-        <%= link_to 'フォローする', follow_path(photo.customer.id), method: :POST, class: "btn btn-success" %>
-      <% end %>
-		</div>
+					<% if photo.customer.id != current_customer.id %>
+					<div style="margin-top: 10px;">
+					<% if current_customer.following?(photo.customer) %>
+        				<%= link_to 'フォローやめる', unfollow_path(photo.customer.id), method: :POST, class: "btn btn-default" %>
+      				<% else %>
+        			<%= link_to 'フォローする', follow_path(photo.customer.id), method: :POST, class: "btn btn-success" %>
+      				<% end %>
+					</div>
 					<% end %>
 				</div>
 					</td>

@@ -1,4 +1,4 @@
-<h1>投稿編集</h1>
+<h1>ユーザー編集</h1>
 <%= form_for(@customer, url: customer_path) do |f| %>
 <% if @customer.errors.any? %>
 <div id="error">
@@ -27,20 +27,7 @@
   </div>
 
   <div class="col-sm-6">
-    <label>パスワード</label>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %>字以上必要です)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-  <div class="col-sm-6">
-    <label>パスワード再確認</label>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-
-  <div class="col-sm-6">
-    <%= f.submit "投稿する", class:"btn btn-lg btn-block btn-base-1 mt-20" %>
+    <%= f.submit "変更する", class:"btn btn-lg btn-block btn-base-1 mt-20" %>
     <% end %>
   </div>
 </div>

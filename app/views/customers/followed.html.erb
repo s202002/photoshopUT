@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
     	<div class="col-lg-8 col-lg-offset-2">
-    		<% @customer.follower_customer.where.not(id: current_customer.id).each do |customer| %>
+    		<% @customer.follower_customer.each do |customer| %>
     		<table class="table table-striped">
     			<tr>
     				<td>

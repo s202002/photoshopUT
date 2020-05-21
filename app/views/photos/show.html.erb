@@ -30,12 +30,13 @@
 		</div>
 		<div class="col-lg-6">
 			<%= attachment_image_tag @photo, :image, size: "600x400", style: "margin-top: 50px;" %>
-						<!-- マップの表示 -->
-			<h2>撮影場所</h2>
+        <!-- マップの表示 -->
+        <h2>撮影場所</h2>
 			<div id='map'></div>
 			<style>
 				#map{
 					height: 300px;
+					width: 600px;
 				}
 			</style>
 			<script>

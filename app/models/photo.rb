@@ -6,6 +6,7 @@ class Photo < ApplicationRecord
 	validates :title, presence: true
 	validates :place, presence: true
 	validates :tag, presence: true
+	default_scope -> { order(created_at: :desc) }
 	def favorited_by?(customer)
 		favorites.where(customer_id: customer.id).exists?
 	end

@@ -2,7 +2,7 @@ class PhotosController < ApplicationController
   before_action :authenticate_customer!
 
   def index
-  	@photos = Photo.all
+    @photos = Photo.page(params[:page]).reverse_order
   end
 
   def show
@@ -21,6 +21,7 @@ class PhotosController < ApplicationController
   	@photo = Photo.new(photo_params)
     @photo.customer = current_customer
   	if @photo.save
+      flash[:notice] = "投稿できました！！"
   		redirect_to photos_path
   	else
   		render "new"
@@ -40,7 +41,7 @@ class PhotosController < ApplicationController
   def destroy
     @photo = Photo.find(params[:id])
     @photo.destroy
-    redirect_to request.referer
+    redirect_back(fallback_location: root_path)
   end
 
   private

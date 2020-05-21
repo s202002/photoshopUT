@@ -4,13 +4,13 @@
 			<center>
 			<%= attachment_image_tag(@customer, :profile_image, :fill, 200,200, fallback: "no_image.jpg", size: '200x200', style: "border-radius: 70%;") %>
 			<h3><%= @customer.name %></h3>
-			<% if @customer.id == current_customer.id %>
 			<div style="margin-top: 10px;">
 				<%= link_to "フォロー数： #{@customer.follower.count}", follower_customer_path(@customer), class: "btn btn-default" %>
 			</div>
 			<div style="margin-top: 10px;">
 				<%=link_to "フォロワー数： #{@customer.followed.count}", followed_customer_path(@customer), class: "btn btn-success" %>
 			</div>
+			<% if @customer.id == current_customer.id %>
 			<div style="margin-top: 10px;">
 			<%= link_to "プロフィール編集", edit_customer_path(current_customer), class: "btn btn-default", style: "width: 150px;" %><br>
 		</div>

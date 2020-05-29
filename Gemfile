@@ -72,7 +72,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
 
 # ページネーション
-gem 'kaminari','~> 1.1.1'
+gem 'kaminari','~> 1.2.1'
 # マップ表示に必要なジェムファイル
 gem 'geocoder'
 # 検索機能

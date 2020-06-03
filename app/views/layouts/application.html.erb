@@ -41,6 +41,9 @@
               <%= link_to destroy_customer_session_path, method: :delete do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>ログアウト
               <% end %>
             </li>
+            <li> style="margin-top: 10px;">
+            <%= link_to customers_path do %><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>投稿一覧
+            </li>
 <!--             どちらにもログインしていない場合 -->
             <% else %>
             <li style="margin: 10px;">

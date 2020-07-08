@@ -23,54 +23,52 @@
 			</center>
 		</div>
 
-<div class ="col-lg-9" >
-
+		<div class ="col-lg-9" >
 			<table class="table table-striped">
 				<% @photos.each do |photo| %>
 				<tr>
 					<td>
-					<%= link_to photo_path(photo.id) do %>
-					<%= attachment_image_tag photo, :image, size: "300x200" %>
-					<% end %>
-					<%= link_to customer_path(photo.customer.id) do %>
-					<%= attachment_image_tag(photo.customer, :profile_image, :fill, 100,100, fallback: "no_image.jpg", size: "100x100", class: "img-circle") %>
-					<%= photo.customer.name %><br>
-					<% end %>
+						<%= link_to photo_path(photo.id) do %>
+							<%= attachment_image_tag photo, :image, size: "300x200" %>
+						<% end %>
+						<%= link_to customer_path(photo.customer.id) do %>
+							<%= attachment_image_tag(photo.customer, :profile_image, :fill, 100,100, fallback: "no_image.jpg", size: "100x100", class: "img-circle") %>
+							<%= photo.customer.name %><br>
+						<% end %>
 					</td>
 					<td>
-					<div style="margin-top: 100px;">
-					@<%= photo.place %>
-					#<%= photo.tag %>
-					</div>
+						<div style="margin-top: 100px;">
+						@<%= photo.place %>
+						#<%= photo.tag %>
+						</div>
                 	</td>
                		<td>
-               		<div style="margin-top: 100px;">
-					<% if photo.favorited_by?(current_customer) %>
-					<%= link_to photo_favorites_path(photo), method: :delete do %>
-					<span class="glyphicon glyphicon-heart-empty" aria-hidden="true" style="color: red;"></span>
-					<%= photo.favorites.count %> いいね
-					<% end %>
-					<% else %>
-					<%= link_to photo_favorites_path(photo), method: :post do %>
-					<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
-					<%= photo.favorites.count %> いいね
-					<% end %>
-					<% end %>
-					<% if photo.customer.id != current_customer.id %>
-					<div style="margin-top: 10px;">
-					<% if current_customer.following?(photo.customer) %>
+               			<div style="margin-top: 100px;">
+						<% if photo.favorited_by?(current_customer) %>
+						<%= link_to photo_favorites_path(photo), method: :delete do %>
+						<span class="glyphicon glyphicon-heart-empty" aria-hidden="true" style="color: red;"></span>
+						<%= photo.favorites.count %> いいね
+						<% end %>
+						<% else %>
+						<%= link_to photo_favorites_path(photo), method: :post do %>
+						<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+						<%= photo.favorites.count %> いいね
+						<% end %>
+						<% end %>
+						<% if photo.customer.id != current_customer.id %>
+						<div style="margin-top: 10px;">
+						<% if current_customer.following?(photo.customer) %>
         				<%= link_to 'フォローやめる', unfollow_path(photo.customer.id), method: :POST, class: "btn btn-default" %>
-      				<% else %>
-        			<%= link_to 'フォローする', follow_path(photo.customer.id), method: :POST, class: "btn btn-success" %>
-      				<% end %>
-					</div>
-					<% end %>
-				</div>
+      					<% else %>
+        				<%= link_to 'フォローする', follow_path(photo.customer.id), method: :POST, class: "btn btn-success" %>
+      					<% end %>
+						</div>
+						<% end %>
+						</div>
 					</td>
 				</tr>
 				<% end %>
 			</table>
 		</div>
 	</div>
-	<%#= paginate @photos, class: "paginate" %>
 </div>

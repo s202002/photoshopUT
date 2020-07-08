@@ -7,22 +7,24 @@
 			<div style="margin-top: 10px;">
 				<%= link_to "フォロー数： #{@customer.follower.count}", follower_customer_path(@customer), class: "btn btn-default" %>
 			</div>
+
 			<div style="margin-top: 10px;">
 				<%=link_to "フォロワー数： #{@customer.followed.count}", followed_customer_path(@customer), class: "btn btn-success" %>
 			</div>
+
 			<% if @customer.id == current_customer.id %>
 			<div style="margin-top: 10px;">
-			<%= link_to "プロフィール編集", edit_customer_path(current_customer), class: "btn btn-default", style: "width: 150px;" %><br>
-		</div>
+				<%= link_to "プロフィール編集", edit_customer_path(current_customer), class: "btn btn-default", style: "width: 150px;" %><br>
+			</div>
 			<% end %>
 			<div style="margin-top: 10px;">
-			<%= link_to "投稿する", new_photo_path, class: "btn btn-success", style: "width: 150px;" %>
+				<%= link_to "投稿する", new_photo_path, class: "btn btn-success", style: "width: 150px;" %>
+			</div>
+			<div style="margin-top: 10px;">
+				<%= link_to "お気に入り一覧", favolist_customer_path(@customer), class: "btn btn-success", style: "width: 150px;" %><br>
+			</div>
+	    	</center>
 		</div>
-		<div style="margin-top: 10px;">
-			<%= link_to "お気に入り一覧", favolist_customer_path(@customer), class: "btn btn-success", style: "width: 150px;" %><br>
-		</div>
-	    </center>
-	</div>
 		<div class="col-lg-9" style="margin-top: 30px;">
 			<% @customer.photos.each do |photo| %>
 			<table class="table table-striped">
@@ -50,9 +52,9 @@
 					<%= link_to "削除する", photo_path(photo), method: :delete, class: "btn btn-danger" %>
 					<% end %>
 					<% end %>
-				</div>
 				</tr>
 			</table>
 		</div>
 	</div>
 </div>
+

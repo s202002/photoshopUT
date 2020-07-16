@@ -2,7 +2,7 @@
 <div class ="container">
 	<div class="row">
 		<div class="col-lg-3">
-			<center>
+			<div class="center_text">
 				<%= attachment_image_tag(current_customer, :profile_image, :fill, 200,200, fallback: "no_image.jpg", size: '200x200', style: "border-radius: 70%;") %>
 				<h3><%= current_customer.name %></h3>
 				<div style="margin-top: 10px;">
@@ -20,7 +20,7 @@
 				<div style="margin-top: 10px;">
 					<%= link_to "お気に入り一覧", favolist_customer_path(current_customer), class: "btn btn-success", style: "width: 150px;" %><br>
 				</div>
-			</center>
+			</div>
 		</div>
 
 		<div class ="col-lg-9" >

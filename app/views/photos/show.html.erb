@@ -1,7 +1,7 @@
 <div class="conatainer">
 	<div class="row">
 		<div class="col-lg-3">
-			<center>
+			<div class="center_text">
 				<div style="margin-top: 10px;">
 					<%= attachment_image_tag(@photo.customer, :profile_image, size: "200x200", fallback: "no_image.jpg", class: "img-circle") %><br>
 					<%= @photo.customer.name %><br>
@@ -23,7 +23,7 @@
 				<div style="margin-top: 10px;">
 				<%= link_to "お気に入り一覧", favolist_customer_path(@photo.customer), class: "btn btn-success", style: "width: 150px;" %><br>
   				</div>
-			</center>
+			</div>
 		</div>
 		<div class="col-lg-6">
 			<%= attachment_image_tag @photo, :image, size: "600x400", style: "margin-top: 50px;" %>
